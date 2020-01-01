@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from WebMarketApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('crudops/', views.crudops),
+    path('costumer/', views.CustomerView.as_view()),
+    path('index/', views.index),
 ]

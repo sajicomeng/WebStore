@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<title>List of Customers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+{% load static %}
+{% if customer_list %}
+    {% for customer in customer_list %}
+        <div class= "w3-card-4 w3-half">
+            <img src="../../static/images/nature.jpg" alt = "nature">
+            <p>{{ customer.username }}</p>
+            <p>{{ customer.mail }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No customer are available.</p>
+{% endif %}
+</body>
+</html>

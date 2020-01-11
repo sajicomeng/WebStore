@@ -54,6 +54,13 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
+def signup(request):
+    template = loader.get_template('WebMarketApp/SignUp.html')
+    context = {
+        'customer_list': ''
+    }
+    return HttpResponse(template.render(context, request))
 
 class CustomerView(ListView):
     model = Customer
+

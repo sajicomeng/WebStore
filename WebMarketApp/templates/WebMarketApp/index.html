@@ -7,8 +7,8 @@
 {% load static %}
 {% if customer_list %}
     {% for customer in customer_list %}
-        <div class= "w3-card-4 w3-half">
-            <img src="../../static/images/nature.jpg" alt = "nature">
+        <div class= "w3-card-4 w3-third w3-panel">
+            <img src="../../static/images/nature.jpg" alt = "nature" width="300" height="200">
             <p>{{ customer.username }}</p>
             <p>{{ customer.mail }}</p>
         </div>

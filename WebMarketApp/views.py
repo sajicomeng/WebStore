@@ -61,6 +61,19 @@ def signup(request):
     }
     return HttpResponse(template.render(context, request))
 
+def signup_submit(request):
+    customer = Customer(
+        password=request.POST['password'], mail=request.POST['email'],
+        username=request.POST['firstname'], phonenumber="002376970"
+    )
+    customer.save()
+    objects = Customer.objects.all()
+    res = 'Printing all Customer entries in the DB : <br>'
+
+    for elt in objects:
+        res += elt.username + "<br>"
+    return HttpResponse(res)
+
 class CustomerView(ListView):
     model = Customer
 

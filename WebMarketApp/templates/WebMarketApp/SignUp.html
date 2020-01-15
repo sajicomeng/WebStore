@@ -11,27 +11,27 @@
       <h2>Input Form</h2>
     </div>
 
-    <form class="w3-container" action="/index">
+    <form class="w3-container" action="/signup_submit/" method="post">{% csrf_token %}
       <p>
       <label>First Name</label>
-      <input class="w3-input" type="text" required>
+      <input name="firstname" class="w3-input" type="text" required>
       </p>
       <p>
       <label>Last Name</label>
-      <input class="w3-input" type="text" required>
+      <input name="lastname" class="w3-input" type="text" required>
       </p>
       <p>
       <label>Email</label>
-      <input class="w3-input" type="text" required>
+      <input name="email" class="w3-input" type="text" required>
       </p>
       <p>
       <label>Password</label>
-      <input class="w3-input" type="password" required>
+      <input name="password" id="pass_input" class="w3-input" type="password" required>
       </p>
       <p>
       <label>Re-enter Password</label>
-          <label name="pass_err" class="w3-text-red"> </label>
-      <input id="pass_input" class="w3-input" type="password" onfocusout="checkPassword()" required>
+          <label id="repass_err" class="w3-text-red"></label>
+      <input name="repassword" id="repass_input" class="w3-input" type="password" onfocusout="checkPassword()" onfocusin="hideError()" required>
       </p>
       <p>
       <button type="submit" class="w3-button w3-blue">Apply</button>
@@ -49,12 +49,16 @@
 
     function checkPassword()
     {
-        alert("HOOOY");
-        var letters = /^[A-Za-z]+$/;
-        var elem = document.getElementById("pass_input");
-        if (!elem.value.match(letters) )
+        var pass = document.getElementById("pass_input");
+        var repass = document.getElementById("repass_input");
+        if (pass.value != repass.value)
         {
-            document.getElementById("pass_err").value = "*Password must contain at least one lower-case character";
+            var err = document.getElementById("repass_err");
+            err.innerHTML = "*Re-entered password does not match";
         }
+    }
+
+    function hideError() {
+        document.getElementById('repass_err').innerHTML = "";
     }
 </script>

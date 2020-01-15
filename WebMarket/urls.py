@@ -22,5 +22,6 @@ urlpatterns = [
     path('crudops/', views.crudops),
     path('costumer/', views.CustomerView.as_view()),
     path('index/', views.index),
-    path('signup', views.signup),
+    path('signup/', views.signup),
+    path('signup_submit/', views.signup_submit),
 ]

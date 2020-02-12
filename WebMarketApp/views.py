@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.template import loader
 from django.db import IntegrityError
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
 def crudops(request):
@@ -69,17 +71,26 @@ def signup_submit(request):
     )
     try:
         customer.save()
-        objects = Customer.objects.all()
-        res = 'Printing all Customer entries in the DB : <br>'
-        for elt in objects:
-            res += elt.username + "<br>"
-        return HttpResponse(res)
+        template = loader.get_template('WebMarketApp/MainTemplate.html')
+        context = {
+            'customer_list': ''
+        }
+        return HttpResponse(template.render(context, request))
     except IntegrityError as e:
         template = loader.get_template('WebMarketApp/SignUp.html')
         context = {
             'username_err': 'This username is used. Please choose another username!'
         }
         return HttpResponse(template.render(context, request))
+
+def register(response):
+    if response.method == "POST":
+        form = UserCreationForm(response.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UserCreationForm()
+    return render(response, "WebMarketApp/register.html", {"form":form})
 
 class CustomerView(ListView):
     model = Customer

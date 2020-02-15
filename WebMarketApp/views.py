@@ -1,13 +1,22 @@
 from django.shortcuts import render
 from WebMarketApp.models import Customer
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import (ListView , FormView, CreateView)
 from django.template import loader
 from django.db import IntegrityError
 from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomerForm
+from .models import Customer
 from django.contrib.auth import login, authenticate
 
-# Create your views here.
+class CustomerSignUpView(FormView):
+    template_name = 'WebMarketApp/customer_signup.html'
+    form_class = CustomerForm
+    success_url = '/index/'
+    model = Customer
+
+    #queryset = Customer.objects.all()
+
 def crudops(request):
     # Creating an entry
 
@@ -24,28 +33,6 @@ def crudops(request):
 
     for elt in objects:
         res += elt.username + "<br>"
-
-    # Read a specific entry:
-    # sorex = Customer.objects.get(username="sorex")
-    # res += 'Printing One entry <br>'
-    # res += sorex.username
-    #
-    # # Delete an entry
-    # res += '<br> Deleting an entry <br>'
-    # sorex.delete()
-    #
-    # # Update
-    # customer = Customer(
-    #     password="www.polo.com", mail="sorex@polo.com",
-    #     username="sorex", phonenumber="002376970"
-    # )
-    #
-    # customer.save()
-    # res += 'Updating entry<br>'
-    #
-    # customer = Customer.objects.get(username='sorex')
-    # customer.username = 'thierry'
-    # customer.save()
 
     return HttpResponse(res)
 

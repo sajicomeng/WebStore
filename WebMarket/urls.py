@@ -22,7 +22,7 @@ urlpatterns = [
     path('crudops/', views.crudops),
     path('costumer/', views.CustomerView.as_view()),
     path('index/', views.index),
-    path('signup/', views.signup),
+    path('signup/', views.CustomerSignUpView.as_view(), name = 'CustomerSignUpView'),
     path('signup_submit/', views.signup_submit),
     path('register/', views.register),
 ]

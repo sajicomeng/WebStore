@@ -2,7 +2,7 @@
 {% block title %}New Customer{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <form method="post" class="form-group">
+    <form method="post" class="form-group" action="/signup/">
         {% csrf_token %}
         {{ form | crispy }}
         <button type="submit" class="btn btn-success">Sign Up</button>

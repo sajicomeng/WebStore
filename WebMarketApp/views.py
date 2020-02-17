@@ -15,6 +15,8 @@ class CustomerSignUpView(FormView):
     success_url = '/index/'
     model = Customer
 
+    def form_valid(self, form):
+        return super().form_valid(form)
     #queryset = Customer.objects.all()
 
 def crudops(request):
